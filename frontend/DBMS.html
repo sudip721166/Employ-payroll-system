@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Payroll System - Tech Leaders Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Login Page -->
+    <div class="login-container" id="loginContainer">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="logo-icon large">TLH</div>
+                <h1>Tech Leaders Hub</h1>
+                <p>Employee Payroll System</p>
+            </div>
+
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="username"><i class="fas fa-user"></i> Username</label>
+                    <input type="text" id="username" placeholder="Enter your username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="password" placeholder="Enter your password" required>
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="rememberMe">
+                        <span class="checkmark"></span>
+                        Remember me
+                    </label>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Sign In
+                </button>
+
+                <div class="demo-credentials">
+                    <p>Demo Credentials:</p>
+                    <p><strong>Username:</strong> admin | <strong>Password:</strong> admin123</p>
+                </div>
+            </form>
+
+            <div class="login-footer">
+                <p>&copy; 2024 Tech Leaders Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div class="main-app" id="mainApp" style="display: none;">
+        <div class="container">
+            <!-- Sidebar -->
+            <div class="sidebar" id="sidebar">
+                <div class="sidebar-header">
+                    <h2><i class="fas fa-chart-bar"></i> Dashboard</h2>
+                    <button class="close-sidebar" id="closeSidebar">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <div class="sidebar-content">
+                    <!-- Statistics Cards -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalEmployees">0</h3>
+                                <p>Total Employees</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-rupee-sign"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalPayroll">₹0</h3>
+                                <p>Total Payroll</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="avgSalary">₹0</h3>
+                                <p>Avg Salary</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="totalHours">0</h3>
+                                <p>Total Hours</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="sidebar-section">
+                        <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+                        <div class="action-buttons">
+                            <button class="action-btn" id="exportDataBtn">
+                                <i class="fas fa-download"></i> Export Data
+                            </button>
+                            <button class="action-btn" id="generateReportBtn">
+                                <i class="fas fa-file-pdf"></i> Generate Report
+                            </button>
+                            <button class="action-btn" id="clearDataBtn">
+                                <i class="fas fa-trash"></i> Clear All Data
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Department Summary -->
+                    <div class="sidebar-section">
+                        <h3><i class="fas fa-building"></i> Department Summary</h3>
+                        <div id="departmentSummary" class="department-list">
+                            <!-- Department data will be populated here -->
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="sidebar-section">
+                        <h3><i class="fas fa-history"></i> Recent Activity</h3>
+                        <div id="recentActivity" class="activity-list">
+                            <!-- Activity logs will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar Backdrop -->
+            <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+            <!-- Main Content -->
+            <div class="main-content-wrapper" id="mainContentWrapper">
+                <header>
+                    <div class="header-content">
+                        <button class="menu-toggle" id="menuToggle">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <div class="company-logo">
+                            <div class="logo-icon">TLH</div>
+                            <h1>Tech Leaders Hub</h1>
+                        </div>
+                        <div class="header-actions">
+                            <button class="header-btn" id="dashboardBtn">
+                                <i class="fas fa-chart-bar"></i> Dashboard
+                            </button>
+                        </div>
+                    </div>
+                </header>
+
+                <div class="main-content">
+                    <!-- Employee Form -->
+                    <div class="form-section">
+                        <h2><i class="fas fa-user-plus"></i> Add/Edit Employee</h2>
+                        <form id="employeeForm">
+                            <input type="hidden" id="employeeId">
+
+                            <div class="form-group">
+                                <label for="name"><i class="fas fa-user"></i> Full Name:</label>
+                                <input type="text" id="name" required placeholder="Enter employee name">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="position"><i class="fas fa-briefcase"></i> Position:</label>
+                                <input type="text" id="position" required placeholder="Enter job position">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="department"><i class="fas fa-building"></i> Department:</label>
+                                <select id="department" required>
+                                    <option value="">Select Department</option>
+                                    <option value="IT">IT</option>
+                                    <option value="HR">HR</option>
+                                    <option value="Finance">Finance</option>
+                                    <option value="Marketing">Marketing</option>
+                                    <option value="Sales">Sales</option>
+                                    <option value="Operations">Operations</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="salary"><i class="fas fa-money-bill"></i> Basic Salary (₹):</label>
+                                <input type="number" id="salary" step="0.01" required placeholder="Enter basic salary">
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="hoursWorked"><i class="fas fa-clock"></i> Hours Worked:</label>
+                                    <input type="number" id="hoursWorked" step="0.1" required
+                                        placeholder="Enter hours worked">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="overtime"><i class="fas fa-clock"></i> Overtime Hours:</label>
+                                    <input type="number" id="overtime" step="0.1" value="0"
+                                        placeholder="Enter overtime hours">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="bonus"><i class="fas fa-gift"></i> Bonus (₹):</label>
+                                    <input type="number" id="bonus" step="0.01" value="0"
+                                        placeholder="Enter bonus amount">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="deductions"><i class="fas fa-minus-circle"></i> Deductions (₹):</label>
+                                    <input type="number" id="deductions" step="0.01" value="0"
+                                        placeholder="Enter deductions">
+                                </div>
+                            </div>
+
+                            <div class="button-group">
+                                <button type="submit" id="saveBtn">
+                                    <i class="fas fa-save"></i> Save Employee
+                                </button>
+                                <button type="button" id="resetBtn">
+                                    <i class="fas fa-redo"></i> Reset
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Employee List and Payroll -->
+                    <div class="list-section">
+                        <div class="section-header">
+                            <h2><i class="fas fa-list"></i> Employee List</h2>
+                            <div class="search-section">
+                                <div class="search-box">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" id="searchInput" placeholder="Search employees...">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="employeeList" class="employee-list">
+                            <!-- Employee list will be populated here -->
+                        </div>
+
+                        <h2><i class="fas fa-chart-pie"></i> Payroll Summary</h2>
+                        <div id="payrollSummary" class="payroll-summary">
+                            <!-- Payroll summary will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

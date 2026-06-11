@@ -1,0 +1,14 @@
+# Render service configuration (template)
+# Replace <your-repo> and <service-name> with your values.
+services:
+  - type: web
+    name: payroll-backend
+    env: docker
+    # If you integrate GitHub, Render will build using Dockerfile in repository root or specified path
+    # For advanced configs, set `plan` or `instanceType` as needed
+
+# Database (managed) example - set up via Render Console after adding this service
+# databases:
+#   - name: payroll-db
+#     engine: mysql
+#     version: 8
