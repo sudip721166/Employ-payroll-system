@@ -1,11 +1,16 @@
 class EmployeePayrollSystem {
     constructor() {
         this.employees = JSON.parse(localStorage.getItem('employees')) || [];
-        this.currentEmployeeId = null;
-        this.activityLog = JSON.parse(localStorage.getItem('activityLog')) || [];
-        this.isSidebarOpen = false;
-        this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-        this.apiUrl = 'https://employ-payroll-1.onrender.com/api'; // Backend API URL
+
+this.currentEmployeeId = null;
+
+this.activityLog = JSON.parse(localStorage.getItem('activityLog')) || [];
+
+this.isSidebarOpen = false;
+
+this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+this.apiUrl = 'https://employ-payroll-1.onrender.com/api'; // Backend API URL
 
         this.initializeLogin();
         
