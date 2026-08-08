@@ -5,8 +5,8 @@ class EmployeePayrollSystem {
         this.activityLog = JSON.parse(localStorage.getItem('activityLog')) || [];
         this.isSidebarOpen = false;
         this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-        this.apiUrl = 'http://localhost:3000/api'; // Backend API URL
-        
+        this.apiUrl = 'https://employ-payroll-1.onrender.com/api'; // Backend API URL
+
         this.initializeLogin();
         
         if (this.isLoggedIn) {
